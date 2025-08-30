@@ -4,7 +4,7 @@ import "./Sidebar.css";
 import k1 from "../assets/kiaanlogo-.png";
 import newlogo from "../assets/newlogozirakbookk.png"
 
-import "./header.css";
+import "./Header.css";
 import ProfileModal from './ProfileModal'; // Correct path lagayein
 const Header = ({ onToggleSidebar }) => {
   const [selectedLang, setSelectedLang] = useState("English");

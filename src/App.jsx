@@ -122,7 +122,7 @@ import PurchaseOrderr from "./Components/Company-Dashboard/Purchases/PurchaseOrd
 import MultiStepPurchaseForms from "./Components/Company-Dashboard/Purchases/MultiStepPurchaseForms";
 import AddProductModal from "./Components/Company-Dashboard/Inventory/AddProductModal";
 import AssetDetails from "./Components/Company-Dashboard/Reports/AssetDetails";
-import Liabilitydetails from "./Components/Company-Dashboard/Reports/liabilitydetails";
+import Liabilitydetails from "./Components/Company-Dashboard/Reports/Liabilitydetails";
 import MultiStepSalesForm from "./Components/Company-Dashboard/Sales/MultiStepSalesForm";
 import ForgotPassword from "./Components/Auth/ForgotPassword";
 import ResetPassword from "./Components/Auth/ResetPassword";
