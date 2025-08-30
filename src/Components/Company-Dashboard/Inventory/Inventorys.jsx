@@ -1,5 +1,6 @@
 // export default MangeStock;
 import React, { useState } from 'react';
+import { useTheme } from '../../../themeContext';
 import { Modal, Button, Form, Row, Col, Card } from 'react-bootstrap';
 import { FaEye, FaEdit, FaTrash, FaPlus, FaInfoCircle } from 'react-icons/fa';
 import * as XLSX from "xlsx";
@@ -8,6 +9,7 @@ import AddProductModal from './AddProductModal';
 import { BiTransfer } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 const InventoryItems = () => {
+  const { theme } = useTheme();
   const navigate = useNavigate();
   const [quantityRange, setQuantityRange] = useState("All");
   const [items, setItems] = useState([
@@ -264,10 +266,10 @@ const InventoryItems = () => {
   };
 
   return (
-    <div className="mt-4 p-2">
+    <div className={`mt-4 p-2 ${theme === 'dark' ? 'theme-dark' : 'theme-light'}`}>
       <Row className="align-items-center mb-3 ">
         <Col md={4}>
-          <h4 className="fw-bold mb-0 d-flex align-items-center gap-2">
+          <h4 className="fw-bold mb-0 d-flex align-items-center gap-2 theme-text">
             <BiTransfer size={40} color="green" />
             <span>Inventory Product</span>
           </h4>
@@ -400,9 +402,9 @@ const InventoryItems = () => {
           </Form.Select>
         </Col>
       </Row>
-      <div className="card bg-white rounded-3 p-4">
+      <div className="card rounded-3 p-4 theme-card">
         <div className="table-responsive">
-          <table className="table table-hover align-middle mb-0">
+          <table className="table table-hover align-middle mb-0 theme-table">
             <thead className="table-light">
               <tr>
                 <th>Product</th> {/* Changed from Name to Product */}
@@ -610,10 +612,10 @@ const InventoryItems = () => {
         </Modal.Footer>
       </Modal>
       {/* Page Description */}
-      <Card className="mb-4 p-3 shadow rounded-4 mt-2">
+      <Card className="mb-4 p-3 shadow rounded-4 mt-2 theme-card">
         <Card.Body>
           {/* Heading */}
-          <h5 className="fw-semibold border-bottom pb-2 mb-3 text-primary">Page Info</h5>
+          <h5 className="fw-semibold border-bottom pb-2 mb-3" style={{ color: "var(--bs-primary)" }}>Page Info</h5>
           {/* Bullet Points */}
           <ul className="text-muted fs-6 mb-0" style={{ listStyleType: "disc", paddingLeft: "1.5rem" }}>
             <li>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTheme } from '../../../themeContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaEye, FaEdit, FaTrash, FaArrowDown, FaArrowUp, FaRupeeSign } from 'react-icons/fa';
 import { Modal, Button, Form, Badge, Card } from 'react-bootstrap';
@@ -60,6 +61,7 @@ const returns = [
 ];
 
 const GSTReturns = () => {
+  const { theme } = useTheme();
   const [showView, setShowView] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
@@ -95,18 +97,18 @@ const GSTReturns = () => {
   };
 
   return (
-    <div className="container-fluid px-2 px-md-5 mt-4">
-      <h4 className="fw-bold mb-4" style={{ color: '#15110aff' }}>GST Returns</h4>
+    <div className={`container-fluid px-2 px-md-5 mt-4 ${theme === 'dark' ? 'theme-dark' : 'theme-light'}`}>
+      <h4 className="fw-bold mb-4 theme-text">GST Returns</h4>
 
       {/* Summary Cards */}
       <div className="row g-3 mb-4">
         {summaryData.map((item, i) => (
           <div className="col-6 col-md-3" key={i}>
-            <div className="card border-0 shadow-sm h-100 rounded-3 text-center">
+            <div className="card border-0 shadow-sm h-100 rounded-3 text-center theme-card">
               <div className="card-body d-flex flex-column align-items-center justify-content-center">
                 <div className="mb-2">{item.icon}</div>
                 <div className="text-muted small">{item.label}</div>
-                <div className="fs-4 fw-bold text-dark">{item.value}</div>
+                <div className="fs-4 fw-bold theme-text">{item.value}</div>
               </div>
             </div>
           </div>
@@ -158,8 +160,8 @@ const GSTReturns = () => {
       </div>
 
       {/* Table */}
-      <div className="table-responsive shadow rounded-3 p-2">
-        <table className="table table-hover align-middle">
+      <div className="table-responsive shadow rounded-3 p-2 theme-card">
+        <table className="table table-hover align-middle theme-table">
           <thead className="table-light">
             <tr>
               <th>Period</th>
@@ -225,7 +227,7 @@ const GSTReturns = () => {
       </div>
 
       {/* View Modal */}
-      <Modal show={showView} onHide={() => setShowView(false)} centered>
+      <Modal show={showView} onHide={() => setShowView(false)} centered className="theme-modal">
         <Modal.Header closeButton>
           <Modal.Title>Return Details</Modal.Title>
         </Modal.Header>
@@ -247,7 +249,7 @@ const GSTReturns = () => {
       </Modal>
 
       {/* Edit Modal */}
-      <Modal show={showEdit} onHide={() => setShowEdit(false)} centered>
+      <Modal show={showEdit} onHide={() => setShowEdit(false)} centered className="theme-modal">
         <Modal.Header closeButton>
           <Modal.Title>Edit Return</Modal.Title>
         </Modal.Header>
@@ -279,7 +281,7 @@ const GSTReturns = () => {
       </Modal>
 
       {/* Delete Modal */}
-      <Modal show={showDelete} onHide={() => setShowDelete(false)} centered>
+      <Modal show={showDelete} onHide={() => setShowDelete(false)} centered className="theme-modal">
         <Modal.Header closeButton>
           <Modal.Title>Confirm Delete</Modal.Title>
         </Modal.Header>
@@ -292,13 +294,10 @@ const GSTReturns = () => {
 
 
 
-        {/* Page Description */}
-     
-    
 
-<Card className="mb-4 p-3 shadow rounded-3 mt-3">
+<Card className="mb-4 p-3 shadow rounded-3 mt-3 theme-card">
   <Card.Body>
-  <small className="d-block text-dark w-100 p-3   rounded-bottom">
+  <small className="d-block w-100 p-3 rounded-bottom theme-text">
     <strong>About GST Returns</strong><br />
     A GST Return is a document you (the business) must file with the government, showing:
     <ul className="mb-2 mt-2 ps-3">
@@ -307,7 +306,7 @@ const GSTReturns = () => {
       <li>The tax collected and paid</li>
     </ul>
     GST Returns help you:
-    <ul className="mb-0 ps-3 text-dark">
+    <ul className="mb-0 ps-3 theme-text">
       <li>Track your GST Liability (Output Tax)</li>
       <li>Claim Input Tax Credit (ITC) on purchases</li>
     </ul>

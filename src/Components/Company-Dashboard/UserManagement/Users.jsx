@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTheme } from "../../../themeContext";
 import {
   Container,
   Row,
@@ -100,6 +101,7 @@ const emptyUser = {
 };
 
 const Users = () => {
+  const { theme } = useTheme();
   const [users, setUsers] = useState(defaultUsers);
   const [search, setSearch] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -259,9 +261,9 @@ const Users = () => {
   };
   
   return (
-    <div className="p-2">
+    <div className={`p-2 ${theme === 'dark' ? 'theme-dark' : 'theme-light'}`}>
       <Container fluid className="py-4">
-        <h3 className="fw-bold">Users</h3>
+        <h3 className="fw-bold theme-text">Users</h3>
         <p className="text-muted mb-4">Manage your users</p>
         
         <Row className="g-2 mb-3 align-items-center">
@@ -286,10 +288,10 @@ const Users = () => {
         
         {/* Filters Section */}
         {showFilters && (
-          <Card className="mb-4 border-secondary">
+          <Card className="mb-4 border-secondary theme-card">
             <Card.Body>
               <div className="d-flex justify-content-between align-items-center mb-3">
-                <h5 className="mb-0">Filter Users</h5>
+                <h5 className="mb-0 theme-text">Filter Users</h5>
                 <Button variant="outline-secondary" size="sm" onClick={clearFilters}>
                   <FaTimes className="me-1" /> Clear All
                 </Button>
@@ -361,10 +363,10 @@ const Users = () => {
           </Card>
         )}
         
-        <Card className="mb-4">
+        <Card className="mb-4 theme-card">
           <Card.Body style={{ padding: 0 }}>
             <div style={{ overflowX: "auto" }}>
-              <Table responsive className="align-middle mb-0" style={{ background: "#fff", fontSize: 16 }}>
+              <Table responsive className="align-middle mb-0 theme-table" style={{ fontSize: 16 }}>
                 <thead className="table-light text-white">
                   <tr>
                     <th className="py-3">#</th>
@@ -451,7 +453,7 @@ const Users = () => {
       </Container>
       
       {/* Add/Edit Modal */}
-      <Modal show={showModal} onHide={() => setShowModal(false)} size="lg">
+      <Modal show={showModal} onHide={() => setShowModal(false)} size="lg" className="theme-modal">
         <Modal.Header closeButton>
           <Modal.Title>{modalType === "add" ? "Add User" : "Edit User"}</Modal.Title>
         </Modal.Header>
@@ -555,7 +557,7 @@ const Users = () => {
       </Modal>
       
       {/* Delete Modal */}
-      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)} centered>
+      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)} centered className="theme-modal">
         <Modal.Header closeButton>
           <Modal.Title>Confirm Delete</Modal.Title>
         </Modal.Header>
@@ -573,7 +575,7 @@ const Users = () => {
       </Modal>
       
       {/* 11. New Reset Password Modal */}
-      <Modal show={showResetModal} onHide={() => setShowResetModal(false)} centered>
+      <Modal show={showResetModal} onHide={() => setShowResetModal(false)} centered className="theme-modal">
         <Modal.Header closeButton>
           <Modal.Title>Reset Password</Modal.Title>
         </Modal.Header>

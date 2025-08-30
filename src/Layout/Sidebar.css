@@ -1,5 +1,5 @@
 .sidebar {
-  background-color: #032d45;
+  background-color: var(--sidebar-bg, #032d45);
   color: #ffffff;
   width: 250px;
   border-right: none;
@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  transition: background-color 0.3s ease;
   
 }
 .submenu {
@@ -22,7 +23,7 @@
 
 .sidebar-footer {
   margin-top: auto;
-  background-color: #032d45;
+  background-color: var(--sidebar-bg, #032d45);
   width: 100%;
 }
 
@@ -51,12 +52,12 @@
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-  background-color: #53b2a5;
+  background-color: var(--bs-primary, #53b2a5);
   border-radius: 6px;
 }
 
 .sidebar-header {
-  background-color: #032d45;
+  background-color: var(--sidebar-bg, #032d45);
 }
 .sidebar::-webkit-scrollbar {
   width: 8px; /* Scrollbar ki width */
@@ -82,14 +83,14 @@
 /* Only apply hover/active effects to dropdown menu items */
 .list-unstyled .sidebar-link:hover,
 .list-unstyled .active-link {
-  background-color: #53b2a5 !important;
+  background-color: var(--bs-primary, #53b2a5) !important;
   color: #ffffff !important;
   transform: translateX(3px);
 }
 
 .list-unstyled .active-link {
   font-weight: 600;
-  box-shadow: 0 4px 8px rgba(255, 193, 7, 0.3);
+  box-shadow: 0 4px 8px rgba(83, 178, 165, 0.3);
 }
 
 .section-header {
@@ -200,16 +201,16 @@
   font-size: 16px;
 }
  .sidebar-link:hover {
-  background-color: #53b2a5 !important;
+  background-color: var(--bs-primary, #53b2a5) !important;
   transform: translateX(3px);
 }
 
 .active-link {
-  background-color: #53b2a5 !important;
+  background-color: var(--bs-primary, #53b2a5) !important;
   /* Yellow highlight */
   color: #ffffff !important;
   font-weight: 600;
-  box-shadow: 0 4px 8px rgba(255, 193, 7, 0.3);
+  box-shadow: 0 4px 8px rgba(83, 178, 165, 0.3);
 }
 
 /* Close Button */
@@ -258,14 +259,14 @@
 
 /* Logout button styling */
 .logout-btn {
-  border-color: #53b2a5 !important;
-  color: #53b2a5 !important;
+  border-color: var(--bs-primary, #53b2a5) !important;
+  color: var(--bs-primary, #53b2a5) !important;
   padding: 8px 16px !important;
   font-size: 15px !important;
 }
 
 .logout-btn:hover {
-  background-color: #53b2a5 !important;
+  background-color: var(--bs-primary, #53b2a5) !important;
   color: white !important;
 }
 

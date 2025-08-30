@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "../../../themeContext";
 import {
   Table,
   Button,
@@ -79,6 +80,7 @@ const getCustomerColumns = () => [
 ];
 
 const CustomersDebtors = () => {
+  const { theme } = useTheme();
   const navigate = useNavigate();
   const [customersList, setCustomersList] = useState([
     // Existing customer
@@ -584,12 +586,12 @@ const CustomersDebtors = () => {
     return companyName ? `https://maps.google.com/?q=${encodeURIComponent(companyName)}` : "";
   }
   return (
-    <div className="p-4 mt-2">
+    <div className={`p-4 mt-2 ${theme === 'dark' ? 'theme-dark' : 'theme-light'}`}>
       {/* Header Buttons */}
       <div className="mb-3">
         <Row className="gy-2 align-items-center">
           <Col xs={12} md="auto">
-            <h6 className="fw-semibold mb-0">Customer Table</h6>
+            <h6 className="fw-semibold mb-0 theme-text">Customer Table</h6>
           </Col>
           <Col xs={12} md>
             <div className="d-flex flex-wrap gap-2 justify-content-md-end">
@@ -647,7 +649,7 @@ const CustomersDebtors = () => {
       </div>
 
       {/* Customer Table */}
-      <Card className="rounded-3 p-3">
+      <Card className="rounded-3 p-3 theme-card">
         {/* Search */}
         <div className="mb-3">
           <Row>
@@ -668,7 +670,7 @@ const CustomersDebtors = () => {
         </div>
 
         {/* Table */}
-        <Table bordered hover responsive>
+        <Table bordered hover responsive className="theme-table">
           <thead className="table-light">
             <tr>
               <th>Voucher No</th>
@@ -1275,9 +1277,9 @@ const CustomersDebtors = () => {
       </Modal>
 
       {/* Page Description */}
-      <Card className="mb-4 p-3 shadow rounded-4 mt-2">
+      <Card className="mb-4 p-3 shadow rounded-4 mt-2 theme-card">
         <Card.Body>
-          <h5 className="fw-semibold border-bottom pb-2 mb-3 text-primary">Page Info</h5>
+          <h5 className="fw-semibold border-bottom pb-2 mb-3" style={{ color: "var(--bs-primary)" }}>Page Info</h5>
           <ul className="text-muted fs-6 mb-0" style={{ listStyleType: "disc", paddingLeft: "1.5rem" }}>
             <li>Manage customer records including contact and address details.</li>
             <li>Track customer balances and tax information (e.g., GSTIN).</li>

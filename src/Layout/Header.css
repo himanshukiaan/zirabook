@@ -15,9 +15,9 @@
   .lang-dropdown-menu {
     position: absolute;
     right: 0;
-    background-color: #ffffff;
-    color: #000;
-    border: 1px solid #ccc;
+    background-color: var(--bs-card-bg, #ffffff);
+    color: var(--bs-body-color, #000);
+    border: 1px solid var(--bs-border-color, #ccc);
     border-radius: 6px;
     z-index: 999;
     min-width: 130px;
@@ -31,16 +31,37 @@
     cursor: pointer;
     transition: background-color 0.2s ease;
     font-size: 14px;
+    color: var(--bs-body-color, #000);
   }
   
   /* Hover Effect on Each Item */
   .lang-item:hover {
-    background-color: #f1f1f1;
+    background-color: var(--bs-table-hover-bg, #f1f1f1);
   }
   
   /* ✅ Active/Selected Language Highlight */
   .active-lang {
-    background-color: #ffc107;
+    background-color: var(--bs-warning, #ffc107);
     font-weight: 600;
   }
-  
+
+  /* Header theme variations */
+  .header.theme-dark {
+    background-color: var(--topbar-bg, #032d45) !important;
+  }
+
+  .header.theme-light {
+    background-color: var(--topbar-bg, #032d45) !important;
+  }
+
+  /* Logout button styling */
+  .logout-btn {
+    border-color: var(--bs-primary, #53b2a5) !important;
+    color: var(--bs-primary, #53b2a5) !important;
+    background-color: transparent !important;
+  }
+
+  .logout-btn:hover {
+    background-color: var(--bs-primary, #53b2a5) !important;
+    color: white !important;
+  }

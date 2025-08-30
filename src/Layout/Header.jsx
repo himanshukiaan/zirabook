@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTheme } from "../themeContext";
 import "./Sidebar.css";
 import k1 from "../assets/kiaanlogo-.png";
 import newlogo from "../assets/newlogozirakbookk.png"
@@ -7,6 +8,7 @@ import newlogo from "../assets/newlogozirakbookk.png"
 import "./Header.css";
 import ProfileModal from './ProfileModal'; // Correct path lagayein
 const Header = ({ onToggleSidebar }) => {
+  const { theme } = useTheme();
   const [selectedLang, setSelectedLang] = useState("English");
   const [showLangDropdown, setShowLangDropdown] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
@@ -17,7 +19,7 @@ const Header = ({ onToggleSidebar }) => {
   };
 
   return (
-    <header className="py-3 px-3 header">
+    <header className={`py-3 px-3 header ${theme === 'dark' ? 'theme-dark' : 'theme-light'}`}>
       <div className="d-flex align-items-center justify-content-between flex-wrap">
         {/* Left Section */}
         <div className="d-flex align-items-center flex-grow-1 gap-3">
@@ -125,8 +127,7 @@ const Header = ({ onToggleSidebar }) => {
           {/* 🔓 Logout */}
           <Link to="/">
             <button
-              className="btn btn-outline"
-              style={{ borderColor: "#53b2a5", color: "#53b2a5" }}
+              className="btn btn-outline logout-btn"
             >
               <i className="fas fa-sign-out-alt me-1"></i> Logout
             </button>

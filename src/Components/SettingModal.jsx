@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Offcanvas, Form } from "react-bootstrap";
+import { useTheme } from "../themeContext";
 import "./SettingModal.css";
 import defaultsidebar from "../../src/assets/defaultsidebar.jpeg";
 import minilayout from "../../src/assets/minilayout.jpeg";
@@ -7,10 +8,17 @@ import withoutheader from "../../src/assets/withoutheader.jpeg";
 import ThemeSetting from "./SettingModal/ThemeSetting";
 
 const SettingModal = ({ show, handleClose }) => {
-  const [layout, setLayout] = useState("default");
+  const { 
+    layout, 
+    updateLayout, 
+    sidebarColor, 
+    updateSidebarColor, 
+    topbarColor, 
+    updateTopbarColor,
+    resetTheme 
+  } = useTheme();
+  
   const [layoutWidth, setLayoutWidth] = useState("fluid");
-  const [topbarColor, setTopbarColor] = useState("");
-  const [sidebarColor, setSidebarColor] = useState("sidebar-bg-default"); // Now class name
 
   const layoutImages = [
     { id: "default", src: defaultsidebar, alt: "Default", name: "Default" },
@@ -20,30 +28,13 @@ const SettingModal = ({ show, handleClose }) => {
 
   const topbarColors = ["#ffffff", "#000000", "#6c757d", "#0d6efd", "#6610f2", "#20c997", "#6366f1"];
 
-  // Define color options with CSS class and display color
-  const sidebarColorOptions = [
-    { class: "sidebar-bg-default", color: "#343a40", name: "Dark" },
-    { class: "sidebar-bg-light", color: "#f8f9fa", name: "Light" },
-    { class: "sidebar-bg-purple", color: "#6f42c1", name: "Purple" },
-    { class: "sidebar-bg-pink", color: "#d63384", name: "Pink" },
-    { class: "sidebar-bg-green", color: "#198754", name: "Green" },
-    { class: "sidebar-bg-blue", color: "#032d45", name: "Blue" },
-  ];
+  const sidebarColors = ["#032d45", "#343a40", "#f8f9fa", "#6f42c1", "#d63384", "#198754"];
 
-  // Save selected sidebar class to localStorage and close
+  // Save settings and close
   const handleApply = () => {
-    localStorage.setItem("sidebarColorClass", sidebarColor);
-    // You can also dispatch to context or update state globally here
     handleClose();
   };
 
-  // Reset all settings
-  const handleReset = () => {
-    setLayout("default");
-    setLayoutWidth("fluid");
-    setTopbarColor("");
-    setSidebarColor("sidebar-bg-default");
-  };
 
   return (
     <Offcanvas show={show} onHide={handleClose} placement="end">
@@ -63,7 +54,7 @@ const SettingModal = ({ show, handleClose }) => {
                 src={item.src}
                 alt={item.alt}
                 className={`layout-img rounded ${layout === item.id ? "border border-primary" : ""}`}
-                onClick={() => setLayout(item.id)}
+                onClick={() => updateLayout(item.id)}
                 style={{ cursor: "pointer", width: "80px" }}
               />
             ))}
@@ -100,7 +91,7 @@ const SettingModal = ({ show, handleClose }) => {
                 key={color}
                 className={`color-box rounded ${topbarColor === color ? "border border-dark border-2" : ""}`}
                 style={{ backgroundColor: color, width: "30px", height: "30px", cursor: "pointer" }}
-                onClick={() => setTopbarColor(color)}
+                onClick={() => updateTopbarColor(color)}
               ></div>
             ))}
           </div>
@@ -110,13 +101,12 @@ const SettingModal = ({ show, handleClose }) => {
         <div className="mt-4">
           <h6 className="fw-semibold">Sidebar Color</h6>
           <div className="d-flex flex-wrap gap-2 mt-2">
-            {sidebarColorOptions.map((option) => (
+            {sidebarColors.map((color) => (
               <div
-                key={option.class}
-                className={`color-box rounded ${sidebarColor === option.class ? "border border-dark border-2" : ""}`}
-                style={{ backgroundColor: option.color, width: "30px", height: "30px", cursor: "pointer" }}
-                onClick={() => setSidebarColor(option.class)}
-                title={option.name}
+                key={color}
+                className={`color-box rounded ${sidebarColor === color ? "border border-dark border-2" : ""}`}
+                style={{ backgroundColor: color, width: "30px", height: "30px", cursor: "pointer" }}
+                onClick={() => updateSidebarColor(color)}
               ></div>
             ))}
           </div>
@@ -129,7 +119,7 @@ const SettingModal = ({ show, handleClose }) => {
 
         {/* Footer Actions */}
         <div className="mt-4 d-flex justify-content-between align-items-center">
-          <Button variant="outline-secondary" size="sm" onClick={handleReset}>
+          <Button variant="outline-secondary" size="sm" onClick={resetTheme}>
             Reset
           </Button>
           <Button variant="primary" size="sm" onClick={handleApply}>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useTheme } from "../../themeContext";
 import "./CompanyDashboard.css";
 import {
   Card,
@@ -30,6 +31,8 @@ import {
 } from "recharts";
 
 const CompanyDashboard = () => {
+  const { theme } = useTheme();
+  
   const summaryCards = [
     {
       label: "Total Purchase Due",
@@ -97,10 +100,10 @@ const CompanyDashboard = () => {
   ];
 
   return (
-    <div className="container-fluid mt-3 mt-sm-3">
+    <div className={`container-fluid mt-3 mt-sm-3 ${theme === 'dark' ? 'theme-dark' : 'theme-light'}`}>
       {/* Company Name at Top */}
       <div className="mb-4">
-        <h3 className="semi-bold text-left" style={{ color: "#53b2a5" }}>ZirakBook Company</h3>
+        <h3 className="semi-bold text-left theme-text" style={{ color: "var(--bs-primary)" }}>ZirakBook Company</h3>
       </div>
 
       {/* Summary Cards */}
@@ -108,12 +111,12 @@ const CompanyDashboard = () => {
         {summaryCards.map((card, i) => (
           <Col md={3} key={i}>
             <Card
-              className="shadow-sm border-0 rounded-3"
+              className="shadow-sm border-0 rounded-3 theme-card"
               style={{ backgroundColor: card.color }}
             >
               <Card.Body className="d-flex justify-content-between align-items-center">
                 <div>
-                  <h5 className="fw-semibold mb-1 text-dark">{card.amount}</h5>
+                  <h5 className="fw-semibold mb-1 theme-text">{card.amount}</h5>
                   <div className="text-muted small">{card.label}</div>
                 </div>
                 <div className="bg-white rounded-circle p-2 d-flex align-items-center justify-content-center shadow-sm">
@@ -130,12 +133,12 @@ const CompanyDashboard = () => {
         {stats.map((stat, i) => (
           <Col md={3} key={i}>
             <Card
-              className="shadow-sm border-0 p-3 rounded-3 text-black"
+              className="shadow-sm border-0 p-3 rounded-3 theme-card"
               style={{ backgroundColor: stat.bg }}
             >
               <div className="d-flex justify-content-between align-items-center">
                 <div>
-                  <h4 className="fw-bold mb-0">{stat.count}</h4>
+                  <h4 className="fw-bold mb-0 theme-text">{stat.count}</h4>
                   <div className="small">{stat.label}</div>
                 </div>
                 <div className="fs-3">{stat.icon}</div>
@@ -148,9 +151,9 @@ const CompanyDashboard = () => {
       {/* Chart Section - Now Full Width */}
       <Row className="g-4 align-items-stretch">
         <Col md={12}>
-          <Card className="h-100 border-0 shadow-sm rounded-4 p-4">
+          <Card className="h-100 border-0 shadow-sm rounded-4 p-4 theme-card">
             <div className="d-flex justify-content-between align-items-center mb-3 flex-wrap">
-              <h6 className="fw-semibold mb-0" style={{ color: "#1a237e" }}>
+              <h6 className="fw-semibold mb-0 theme-text">
                 📊 Sales & Purchase Report
               </h6>
               <Dropdown>
@@ -173,10 +176,10 @@ const CompanyDashboard = () => {
                 <YAxis />
                 <RechartTooltip />
                 <Legend />
-                <Bar dataKey="Sales" fill="#1a237e" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="Sales" fill="var(--bs-primary)" radius={[4, 4, 0, 0]} />
                 <Bar
                   dataKey="Purchase"
-                  fill="#53b2a5"
+                  fill="var(--bs-success)"
                   radius={[4, 4, 0, 0]}
                 />
               </BarChart>

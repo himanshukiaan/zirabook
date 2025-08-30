@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useTheme } from '../../../themeContext';
 import { Table, Button, Badge, Modal, Form } from 'react-bootstrap';
 
 
@@ -16,6 +17,7 @@ const statusBadge = (status) => {
 
 
 const Invoice = () => {
+  const { theme } = useTheme();
   const [statusFilter, setStatusFilter] = useState("");
   const [orders, setOrders] = useState(initialOrders);
   const [stepModal, setStepModal] = useState(false);
@@ -86,10 +88,10 @@ const Invoice = () => {
     return dateMatch && invoiceNoMatch && statusMatch;
   });
   return (
-    <div className="p-4">
+    <div className={`p-4 ${theme === 'dark' ? 'theme-dark' : 'theme-light'}`}>
 <div className="d-flex align-items-center gap-2 mb-4">
   <FaArrowLeft size={20} color="blue" />
-  <h5 className="mb-0">Sales Workflow</h5>
+  <h5 className="mb-0 theme-text">Sales Workflow</h5>
 </div>
 
       <Button variant="primary" className="mb-3" onClick={() => handleCreateNewInvoice()} 
@@ -99,7 +101,7 @@ const Invoice = () => {
       </Button>
 
       {/* Top Filter Section */}
-<div className="mb-2 p-3 bg-light rounded d-flex flex-wrap gap-3 align-items-end">
+<div className="mb-2 p-3 rounded d-flex flex-wrap gap-3 align-items-end theme-card">
   <div>
     <label className="form-label text-secondary">From Date</label>
     <input
@@ -159,7 +161,7 @@ const Invoice = () => {
     Clear
   </Button>
 </div>
-      <Table bordered hover responsive className="text-center align-middle">
+      <Table bordered hover responsive className="text-center align-middle theme-table">
       <thead className="table-light">
   <tr>
     <th>#</th>
@@ -203,7 +205,7 @@ const Invoice = () => {
 </tbody>
       </Table>
 
-      <Modal show={stepModal} onHide={handleCloseModal} size="xl" centered>
+      <Modal show={stepModal} onHide={handleCloseModal} size="xl" centered className="theme-modal">
         <Modal.Header closeButton>
           <Modal.Title>{selectedOrder ? 'Continue Invoice' : 'Create Invoice'}</Modal.Title>
         </Modal.Header>

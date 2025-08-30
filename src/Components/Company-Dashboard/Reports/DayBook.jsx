@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTheme } from "../../../themeContext";
 import { FaFilePdf, FaFileExcel, FaTrash, FaEye } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
@@ -6,6 +7,7 @@ import "./Daybook.css";
 import { Card, Modal, Button, Badge } from "react-bootstrap";
 
 const Daybook = () => {
+  const { theme } = useTheme();
   // Predefined account types and names
 // Replace the entire predefinedAccounts object
 const predefinedAccounts = [
@@ -197,11 +199,11 @@ const predefinedAccounts = [
   };
   
   return (
-    <div className="container-fluid bg-light py-4 px-4">
+    <div className={`container-fluid py-4 px-4 ${theme === 'dark' ? 'theme-dark' : 'theme-light'}`} style={{ backgroundColor: "var(--bs-body-bg)" }}>
       {/* Header */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
-          <h5 className="fw-bold mb-1">DayBook</h5>
+          <h5 className="fw-bold mb-1 theme-text">DayBook</h5>
           
         </div>
         <div className="d-flex gap-2">
@@ -213,10 +215,10 @@ const predefinedAccounts = [
       {/* Summary Cards */}
       <div className="row mb-4 g-4">
         <div className="col-md-3">
-          <Card className="shadow-sm border-0 rounded-3" style={{ backgroundColor: "#e3f2fd" }}>
+          <Card className="shadow-sm border-0 rounded-3 theme-card" style={{ backgroundColor: theme === 'dark' ? 'var(--bs-card-bg)' : "#e3f2fd" }}>
             <Card.Body className="d-flex justify-content-between align-items-center">
               <div>
-                <h5 className="fw-semibold mb-1 text-dark">{totalEntries}</h5>
+                <h5 className="fw-semibold mb-1 theme-text">{totalEntries}</h5>
                 <div className="text-muted small">Total Entries</div>
               </div>
               <div className="bg-white rounded-circle p-2 d-flex align-items-center justify-content-center shadow-sm">
@@ -226,10 +228,10 @@ const predefinedAccounts = [
           </Card>
         </div>
         <div className="col-md-3">
-          <Card className="shadow-sm border-0 rounded-3" style={{ backgroundColor: "#e8f5e9" }}>
+          <Card className="shadow-sm border-0 rounded-3 theme-card" style={{ backgroundColor: theme === 'dark' ? 'var(--bs-card-bg)' : "#e8f5e9" }}>
             <Card.Body className="d-flex justify-content-between align-items-center">
               <div>
-                <h5 className="fw-semibold mb-1 text-dark">${totalDebit.toLocaleString()}</h5>
+                <h5 className="fw-semibold mb-1 theme-text">${totalDebit.toLocaleString()}</h5>
                 <div className="text-muted small">Total Debit</div>
               </div>
               <div className="bg-white rounded-circle p-2 d-flex align-items-center justify-content-center shadow-sm">
@@ -239,10 +241,10 @@ const predefinedAccounts = [
           </Card>
         </div>
         <div className="col-md-3">
-          <Card className="shadow-sm border-0 rounded-3" style={{ backgroundColor: "#fff3e0" }}>
+          <Card className="shadow-sm border-0 rounded-3 theme-card" style={{ backgroundColor: theme === 'dark' ? 'var(--bs-card-bg)' : "#fff3e0" }}>
             <Card.Body className="d-flex justify-content-between align-items-center">
               <div>
-                <h5 className="fw-semibold mb-1 text-dark">${totalCredit.toLocaleString()}</h5>
+                <h5 className="fw-semibold mb-1 theme-text">${totalCredit.toLocaleString()}</h5>
                 <div className="text-muted small">Total Credit</div>
               </div>
               <div className="bg-white rounded-circle p-2 d-flex align-items-center justify-content-center shadow-sm">
@@ -252,10 +254,10 @@ const predefinedAccounts = [
           </Card>
         </div>
         <div className="col-md-3">
-          <Card className="shadow-sm border-0 rounded-3" style={{ backgroundColor: netBalance >= 0 ? "#e8f5e9" : "#ffebee" }}>
+          <Card className="shadow-sm border-0 rounded-3 theme-card" style={{ backgroundColor: theme === 'dark' ? 'var(--bs-card-bg)' : (netBalance >= 0 ? "#e8f5e9" : "#ffebee") }}>
             <Card.Body className="d-flex justify-content-between align-items-center">
               <div>
-                <h5 className="fw-semibold mb-1 text-dark">${netBalance.toLocaleString()}</h5>
+                <h5 className="fw-semibold mb-1 theme-text">${netBalance.toLocaleString()}</h5>
                 <div className="text-muted small">Net Balance</div>
               </div>
               <div className="bg-white rounded-circle p-2 d-flex align-items-center justify-content-center shadow-sm">
@@ -334,7 +336,7 @@ const predefinedAccounts = [
       
       {/* Table with Separate Columns */}
       <div className="table-responsive">
-        <table className="table table-bordered align-middle">
+        <table className="table table-bordered text-center align-middle mb-0 theme-table">
           <thead className="table-light">
           <tr>
   <th>Voucher Date</th>
@@ -417,9 +419,9 @@ const predefinedAccounts = [
       </div>
       
       {/* Page Info */}
-      <Card className="mb-4 p-3 shadow rounded-4 mt-2">
+      <Card className="mb-4 p-3 shadow rounded-4 mt-2 theme-card">
         <Card.Body>
-          <h5 className="fw-semibold border-bottom pb-2 mb-3 text-primary">Page Info</h5>
+          <h5 className="fw-semibold border-bottom pb-2 mb-3" style={{ color: "var(--bs-primary)" }}>Page Info</h5>
           <ul className="text-muted fs-6 mb-0" style={{ listStyleType: "disc", paddingLeft: "1.5rem" }}>
             <li>Daybook is a daily summary of all financial and accounting entries recorded on a specific date.</li>
             <li>Acts like a business diary, capturing transactions such as sales, purchases, payments, and receipts.</li>
